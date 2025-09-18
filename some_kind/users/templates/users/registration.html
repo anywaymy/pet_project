@@ -1,5 +1,8 @@
 {% extends 'users/base.html' %}
 {% block content %}
+{% if request.user.is_authenticated %}
+    YOU ARE ALREADY REGISTERED !
+{% else %}
 <div class="wrap">
     <div class="management-content">
         <form action="{% url 'users:registration' %}" class="management registration" method="post">
@@ -30,4 +33,5 @@
         </form>
     </div>
 </div>
+{% endif %}
 {% endblock %}
