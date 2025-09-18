@@ -1,9 +1,10 @@
 from django.contrib.auth.views import LoginView
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView, ListView
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.contrib import auth, messages
 
+from  users.models import User
 from users.forms import UserLoginForm, UserRegistrationForm
 
 class UserLoginView(LoginView):
@@ -19,6 +20,10 @@ class UserRegistrationView(CreateView):
     def form_valid(self, form):
         messages.success(self.request, "Поздравляем, вы успешно прошли регистрацию!")
         return super().form_valid(form)
+
+class UserProfileView(ListView):
+    model = User
+    template_name = "users/profile.html"
 
 def logout(request):
     auth.logout(request)
