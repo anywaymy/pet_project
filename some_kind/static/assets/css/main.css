@@ -39,7 +39,7 @@ ol, ul {
 
 .username {
     margin-right: 7px;
-    text-transform: lowercase;
+    text-transform: none;
     text-decoration: underline;
     line-height: normal;
     opacity: 1;
