@@ -1,16 +1,9 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>login</title>
-    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-</head>
-<body>
-<div class="wrap">
+{% extends 'users/base.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+    YOU ARE ALREADY AUTHENTICATED !
+{% else %}
+    <div class="wrap">
     <div class="management-content">
         <form action="{% url 'users:login' %}" class="management login" method="post">
             {% csrf_token %}
@@ -35,5 +28,5 @@
         </form>
     </div>
 </div>
-</body>
-</html>
+{% endif %}
+{% endblock %}
