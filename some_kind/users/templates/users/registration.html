@@ -2,32 +2,32 @@
 {% block content %}
 <div class="wrap">
     <div class="management-content">
-        <div class="management registration">
+        <form action="{% url 'users:registration' %}" class="management registration" method="post">
+            {% csrf_token %}
             <h1 class="management-title">
                 Регистрация
             </h1>
 
             <div class="input-content">
-                <input type="text" class="input-content__input" placeholder="Логин">
+                 {{ form.username }}
             </div>
             <div class="input-content">
-                <input type="email" class="input-content__input" placeholder="Email">
+                 {{ form.email }}
             </div>
             <div class="input-content">
-                <input type="password" class="input-content__input" placeholder="Пароль">
+                 {{ form.password1 }}
             </div>
             <div class="input-content">
-                <input type="password" class="input-content__input" placeholder="Повторите пароль">
+                 {{ form.password2 }}
             </div>
 
             <div class="management__btn">
                 <button class="management__button"  type="submit">регистрация</button>
             </div>
             <span href="registration.html" class="management__no_account">
-                    Уже есть аккаунт? <a href="registration.html">авторизация</a>
-                </span>
-
-        </div>
+                Уже есть аккаунт? <a href="{% url 'users:login' %}">авторизация</a>
+            </span>
+        </form>
     </div>
 </div>
 {% endblock %}
