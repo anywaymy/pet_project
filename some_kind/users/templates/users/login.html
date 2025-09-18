@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
 </head>
 <body>
-<div class="wrap">
+{% if request.user.is_authenticated %}
+    YOU ARE ALREADY AUTHENTICATED !
+{% else %}
+    <div class="wrap">
     <div class="management-content">
         <form action="{% url 'users:login' %}" class="management login" method="post">
             {% csrf_token %}
@@ -35,5 +38,6 @@
         </form>
     </div>
 </div>
+{% endif %}
 </body>
 </html>

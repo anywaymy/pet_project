@@ -37,6 +37,20 @@ ol, ul {
 	list-style: none;
 }
 
+.username {
+    margin-right: 7px;
+    text-transform: lowercase;
+    text-decoration: underline;
+    line-height: normal;
+    opacity: 1;
+    transition: opacity .2s linear;
+}
+
+.username:hover {
+    opacity: .6;
+    transition: opacity .2s linear;
+}
+
 .management-content {
 	display: flex;
 	justify-content: center;
