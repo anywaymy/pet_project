@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-kfy)z4iwp89&!n9#^pai^vyq94p$@k1_y6+bsqcn_$+dq1=0j(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+DOMAIN_NAME = "http://127.0.0.1:8000"
 
 
 # Application definition
@@ -129,5 +131,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
