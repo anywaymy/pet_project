@@ -1,0 +1,11 @@
+{% extends 'users/base.html' %}
+{% block content %}
+    <div class="wrap">
+        <section class="profile">
+            <h1>Profile</h1>
+            <div class="profile__username">
+                username: {{user.username}}
+            </div>
+        </section>
+    </div>
+{% endblock %}
