@@ -14,3 +14,12 @@ class Post(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class SendMessage(models.Model):
+    name = models.CharField(max_length=40)
+    email = models.EmailField(max_length=60)
+    textarea = models.TextField(max_length=500)
+
+    def __str__(self):
+        return self.name

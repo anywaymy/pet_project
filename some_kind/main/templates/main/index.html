@@ -121,19 +121,24 @@
 						<div class="inner">
 							<h2 class="major">Get in touch</h2>
 							<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
-							<form method="post" action="#">
+							<form method="post" action="{% url 'main:index' %}">
+								{% csrf_token %}
 								<div class="fields">
+									{{form.non_field_errors}}
 									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
+										<label for="{{form.name.id_for_label}}">Name</label>
+										{{ form.name.errors }}
+										{{ form.name }}
 									</div>
 									<div class="field">
-										<label for="email">Email</label>
-										<input type="email" name="email" id="email" />
+										<label for="{form.email.id_for_label}}">Email</label>
+										{{ form.email.errors }}
+										{{ form.email }}
 									</div>
 									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="4"></textarea>
+										<label for="{form.textarea.id_for_label}}">Message</label>
+										{{ form.textarea.errors }}
+										{{ form.textarea }}
 									</div>
 								</div>
 								<ul class="actions">
