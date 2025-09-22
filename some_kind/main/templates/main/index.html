@@ -105,7 +105,11 @@
 										{% endfor %}
 									</section>
 									<ul class="actions">
-										<li><a href="#" class="button">Browse All</a></li>
+										{% if object_list|length == 4 and not show_all %}
+											<li><a href="?show_all=1" class="button">Browse All</a></li>
+										{% elif show_all %}
+											<li><a href="." class="button">Show less</a></li>
+										{% endif %}
 									</ul>
 								</div>
 							</section>
