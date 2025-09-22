@@ -1,5 +1,5 @@
 from django.contrib import admin
-from users.models import User, EmailVerification
+from users.models import User, EmailVerification, UserPasswordResetToken
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
@@ -8,3 +8,7 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(EmailVerification)
 class EmailVerificationAdmin(admin.ModelAdmin):
     list_display = ('user',)
+
+@admin.register(UserPasswordResetToken)
+class EmailVerificationAdmin(admin.ModelAdmin):
+    list_display = ('user', 'code')

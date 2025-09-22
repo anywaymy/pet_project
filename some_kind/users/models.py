@@ -30,3 +30,9 @@ class EmailVerification(models.Model):
 
     def is_expired(self):
         return True if timezone.now() >= self.expiration else False
+
+
+class UserPasswordResetToken(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    code = models.UUIDField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)

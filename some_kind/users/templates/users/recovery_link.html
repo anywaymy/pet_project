@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>recovery</title>
+</head>
+<body>
+    Восстановление
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+         <div class="management__btn">
+                <button class="management__button"  type="submit">Восстановить</button>
+            </div>
+    </form>
+</body>
+</html>
