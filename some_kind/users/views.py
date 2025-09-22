@@ -39,7 +39,7 @@ class EmailVerificationView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         user = User.objects.filter(email=self.kwargs.get("email")).first()
-        verify = EmailVerification.objects.get(user=user, code=self.kwargs.get("code"))
+        verify = EmailVerification.objects.filter(user=user, code=self.kwargs.get("code"))
 
         if verify.exists() and not verify.first().is_expired():
             user.is_verify = True
@@ -47,7 +47,7 @@ class EmailVerificationView(TemplateView):
 
             return super().get(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect(reverse('index'))
+            return HttpResponseRedirect(reverse('main:index'))
 
 class UserProfileView(ListView):
     model = User

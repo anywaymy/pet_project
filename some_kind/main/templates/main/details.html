@@ -1,0 +1,23 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>details</title>
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+</head>
+<body>
+<div id="page-wrapper">
+    <section class="post">
+        <div class="post__img">
+            <img src="{{post.image.url}}" alt="">
+        </div>
+        <h3 class="major">{{post.name}}</h3>
+        <p>{{post.description}}</p>
+    </section>
+</div>
+</body>
+</html>
