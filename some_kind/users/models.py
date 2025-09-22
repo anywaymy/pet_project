@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.db import models
 from django.urls import reverse_lazy
 from django.conf import settings
+from django.utils import timezone
 
 class User(AbstractUser):
     username = models.CharField(max_length=24, unique=True)
@@ -26,3 +27,6 @@ class EmailVerification(models.Model):
             from_email= "solid@gmail.com",
             recipient_list=[self.user.email]
         )
+
+    def is_expired(self):
+        return True if timezone.now() >= self.expiration else False
