@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, SetPasswordForm
 
 from users.models import User
 
@@ -48,3 +48,19 @@ class UsersResetPasswordForm(forms.Form):
         'placeholder': 'Email',
         'class': 'input-content__input'
     }))
+
+class StyledSetPasswordForm(SetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['new_password1'].widget.attrs.update({
+            'class': 'management__input',
+            'placeholder': 'Введите пароль'
+        })
+        self.fields['new_password2'].widget.attrs.update({
+            'class': 'management__input',
+            'placeholder': 'Повторите пароль'
+        })
+
+    class Meta:
+        model = User
+        fields = ('new_password1', 'new_password2')

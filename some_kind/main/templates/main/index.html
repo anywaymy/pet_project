@@ -15,7 +15,7 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1><a href="index.html">Solid State</a></h1>
+						<h1><a href="{% url 'main:index' %}">Solid State</a></h1>
 						<nav>
 							<a href="{% url 'users:profile' %}" class="username">{{request.user.username}}</a>
 							<a href="#menu">Menu</a>
@@ -27,15 +27,18 @@
 						<div class="inner">
 							<h2>Menu</h2>
 							<ul class="links">
-								<li><a href="index.html">Home</a></li>
-								<li><a href="generic.html">Generic</a></li>
-								<li><a href="elements.html">Elements</a></li>
+								<li><a href="{% url 'main:index' %}">Home</a></li>
+								<li><a href=".">Generic</a></li>
+								<li><a href=".">Elements</a></li>
 								{% if request.user.is_authenticated %}
 									<li><a href="{% url 'users:logout' %}">Log out</a></li>
 								{% else %}
 									<li><a href="{% url 'users:login' %}">Log In</a></li>
 								{% endif %}
 								<li><a href="{% url 'users:registration' %}">Sign Up</a></li>
+								{% if user.is_superuser or user.is_stuff %}
+								<li><a href="{% url 'admin:index' %}">Admin panel</a></li>
+								{% endif %}
 							</ul>
 							<a href="#" class="close">Close</a>
 						</div>
@@ -46,7 +49,7 @@
 						<div class="inner">
 							<div class="logo"><span class="icon fa-gem"></span></div>
 							<h2>This is Solid State</h2>
-							<p>Another free + fully responsive site template by <a href="http://html5up.net">HTML5 UP</a></p>
+							<p>Another free + fully responsive site template by <a href="/">seohanta</a></p>
 						</div>
 					</section>
 
@@ -158,7 +161,7 @@
 								<li class="icon brands fa-instagram"><a href="#">instagram.com/untitled-tld</a></li>
 							</ul>
 							<ul class="copyright">
-								<li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="#">landing</a></li>
+								<li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="/">seohanta</a></li>
 							</ul>
 						</div>
 					</section>

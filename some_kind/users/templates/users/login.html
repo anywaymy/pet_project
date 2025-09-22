@@ -1,7 +1,10 @@
 {% extends 'users/base.html' %}
 {% block content %}
 {% if request.user.is_authenticated %}
+<div style="text-align:center;">
     YOU ARE ALREADY AUTHENTICATED !
+</div>
+
 {% else %}
     <div class="wrap">
     <div class="management-content">
@@ -24,7 +27,9 @@
             <span href="registration.html" class="management__no_account">
                 Ещё не зарегестрированы? <a href="{% url 'users:registration' %}">Регистрация</a>
             </span>
-
+            <div class="management__forgot">
+                <a href="{% url 'users:forgot_password' %}">Забыли пароль?</a>
+            </div>
         </form>
     </div>
 </div>

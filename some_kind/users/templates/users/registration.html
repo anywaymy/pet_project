@@ -1,7 +1,9 @@
 {% extends 'users/base.html' %}
 {% block content %}
 {% if request.user.is_authenticated %}
+<div style="text-align:center;">
     YOU ARE ALREADY REGISTERED !
+</div>
 {% else %}
 <div class="wrap">
     <div class="management-content">

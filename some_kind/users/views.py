@@ -15,7 +15,7 @@ from django.conf import settings
 
 
 from users.models import User, EmailVerification, UserPasswordResetToken
-from users.forms import UserLoginForm, UserRegistrationForm, UsersResetPasswordForm
+from users.forms import UserLoginForm, UserRegistrationForm, UsersResetPasswordForm, StyledSetPasswordForm
 
 class UserLoginView(LoginView):
     form_class = UserLoginForm
@@ -65,7 +65,7 @@ class UsersPasswordConfirmResetView(View):
     # template_name = "users/recovery_link.html"
     def get(self, request, *args, **kwargs):
         code_obj = get_object_or_404(UserPasswordResetToken, code=self.kwargs.get("code"), user__email=self.kwargs.get("email"))
-        form = SetPasswordForm(user=code_obj.user)
+        form = StyledSetPasswordForm(user=code_obj.user)
         if not code_obj:
             return render(request, template_name="users/recovery_invalid_link.html")
 
@@ -77,7 +77,7 @@ class UsersPasswordConfirmResetView(View):
         if not code_obj:
             return render(request, template_name="users/recovery_invalid_link.html")
 
-        form = SetPasswordForm(user=code_obj.user, data=request.POST)
+        form = StyledSetPasswordForm(user=code_obj.user, data=request.POST)
 
         if form.is_valid():
             form.save()
