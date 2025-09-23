@@ -54,7 +54,7 @@ class StyledSetPasswordForm(SetPasswordForm):
         super().__init__(*args, **kwargs)
         self.fields['new_password1'].widget.attrs.update({
             'class': 'management__input',
-            'placeholder': 'Введите пароль'
+            'placeholder': 'Введите новый пароль'
         })
         self.fields['new_password2'].widget.attrs.update({
             'class': 'management__input',

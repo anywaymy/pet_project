@@ -42,7 +42,7 @@ class UserRegistrationView(CreateView):
 class UsersResetPasswordView(FormView):
     form_class = UsersResetPasswordForm
     template_name = "users/forgot_password.html"
-    success_url = reverse_lazy("main:index")
+    success_url = reverse_lazy("users:password_reset_info")
 
     def form_valid(self, form):
         email = form.cleaned_data['email']
@@ -104,6 +104,9 @@ class EmailVerificationView(TemplateView):
 class UserProfileView(ListView):
     model = User
     template_name = "users/profile.html"
+
+def password_reset_info(request):
+    return render(request, template_name="users/password_reset_info.html")
 
 def password_reset_complete(request):
     return render(request, template_name="users/password_reset_complete.html")
