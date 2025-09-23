@@ -1,5 +1,6 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.views.generic import TemplateView, DetailView, ListView
+from django.views import View
 from django.views.generic.edit import FormMixin
 from main.models import Post
 from main.forms import SendMessageForm
@@ -39,6 +40,20 @@ class IndexView(FormMixin,ListView):
         else:
             self.object_list = self.get_queryset()
             return self.form_invalid(form)
+
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            posts = context['object_list']
+            posts_data = [{
+                'id': post.id,
+                'name': post.name,
+                'slug': post.slug,
+                'description': post.description,
+                'image_url': post.image.url if post.image else ''
+            } for post in posts]
+            return JsonResponse({'posts': posts_data})
+        else:
+            return super().render_to_response(context, **response_kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -59,11 +59,10 @@
 						<!-- One -->
 							<section id="one" class="wrapper spotlight style1">
 								<div class="inner">
-									<a href="#" class="image"><img src="{% static 'images/pic01.jpg' %}" alt="" /></a>
+									<div class="image"><img src="{% static 'images/pic01.jpg' %}" alt="" /></div>
 									<div class="content">
 										<h2 class="major">Magna arcu feugiat</h2>
 										<p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-										<a href="#" class="special">Learn more</a>
 									</div>
 								</div>
 							</section>
@@ -71,11 +70,11 @@
 						<!-- Two -->
 							<section id="two" class="wrapper alt spotlight style2">
 								<div class="inner">
-									<a href="#" class="image"><img src="{% static 'images/pic02.jpg' %}" alt="" /></a>
+									<div class="image"><img src="{% static 'images/pic02.jpg' %}" alt="" /></div>
 									<div class="content">
 										<h2 class="major">Tempus adipiscing</h2>
 										<p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-										<a href="#" class="special">Learn more</a>
+
 									</div>
 								</div>
 							</section>
@@ -83,11 +82,11 @@
 						<!-- Three -->
 							<section id="three" class="wrapper spotlight style3">
 								<div class="inner">
-									<a href="#" class="image"><img src="{% static 'images/pic03.jpg' %}" alt="" /></a>
+									<div class="image"><img src="{% static 'images/pic03.jpg' %}" alt="" /></div>
 									<div class="content">
 										<h2 class="major">Nullam dignissim</h2>
 										<p>Lorem ipsum dolor sit amet, etiam lorem adipiscing elit. Cras turpis ante, nullam sit amet turpis non, sollicitudin posuere urna. Mauris id tellus arcu. Nunc vehicula id nulla dignissim dapibus. Nullam ultrices, neque et faucibus viverra, ex nulla cursus.</p>
-										<a href="#" class="special">Learn more</a>
+
 									</div>
 								</div>
 							</section>
@@ -97,21 +96,24 @@
 								<div class="inner">
 									<h2 class="major">Vitae phasellus</h2>
 									<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
-									<section class="features">
+									<section class="features" id="posts-container">
 										{% for post in object_list %}
-											<article>
-											<a href="{% url 'main:details' post.slug %}" class="image"><img src="{{post.image.url}}" alt="" /></a>
-											<h3 class="major">{{post.name}}</h3>
-											<p>{{post.description}}</p>
+										<article>
+											<a href="{% url 'main:details' post.slug %}" class="image"><img src="{{ post.image.url }}" alt=""/></a>
+											<h3 class="major">{{ post.name }}</h3>
+											<p>{{ post.description }}</p>
 											<a href="{% url 'main:details' post.slug %}" class="special">Learn more</a>
 										</article>
 										{% endfor %}
 									</section>
+
 									<ul class="actions">
 										{% if object_list|length == 4 and not show_all %}
-											<li><a href="?show_all=1" class="button">Browse All</a></li>
+										<li>
+											<button class="button" id="browse-all-btn">Browse All</button>
+										</li>
 										{% elif show_all %}
-											<li><a href="." class="button">Show less</a></li>
+										<li><a href="." class="button">Show less</a></li>
 										{% endif %}
 									</ul>
 								</div>
@@ -168,7 +170,11 @@
 
 			</div>
 
+		<button id="load-btn">Получить данные</button>
+    	<div id="output"></div>
+
 		<!-- Scripts -->
+			<script src="{% static 'assets/js/browse_all.js' %}"></script>
 			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
 			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
 			<script src="{% static 'assets/js/browser.min.js' %}"></script>
