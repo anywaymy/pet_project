@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>error</title>
-</head>
-<body>
-    Восстановление провалено
-</body>
-</html>
+{% extends 'users/base.html' %}
+{% block content %}
+<div style="text-align: center; font-size: 45px;">
+    <h1>Восстановление провалено!</h1>
+    <a href="{% url 'main:index' %}">Вернуться на главную</a>
+</div>
+{% endblock %}

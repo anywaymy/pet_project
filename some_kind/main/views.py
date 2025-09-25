@@ -1,15 +1,19 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.views.generic import TemplateView, DetailView, ListView
+from django.views import View
 from django.views.generic.edit import FormMixin
 from main.models import Post
 from main.forms import SendMessageForm
 from django.urls import reverse
 
+from common.view import TitleMixin
 
-class IndexView(FormMixin,ListView):
+
+class IndexView(TitleMixin,FormMixin,ListView):
     model = Post
     form_class = SendMessageForm
     template_name = "main/index.html"
+    title = "main"
 
     def get_success_url(self):
         return reverse("main:index")
@@ -40,6 +44,20 @@ class IndexView(FormMixin,ListView):
             self.object_list = self.get_queryset()
             return self.form_invalid(form)
 
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            posts = context['object_list']
+            posts_data = [{
+                'id': post.id,
+                'name': post.name,
+                'slug': post.slug,
+                'description': post.description,
+                'image_url': post.image.url if post.image else ''
+            } for post in posts]
+            return JsonResponse({'posts': posts_data})
+        else:
+            return super().render_to_response(context, **response_kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['show_all'] = bool(self.request.GET.get('show_all'))
@@ -47,7 +65,8 @@ class IndexView(FormMixin,ListView):
 
         return context
 
-class PostDetailView(DetailView):
+class PostDetailView(TitleMixin, DetailView):
     model = Post
     context_object_name = "post"
     template_name = "main/details.html"
+    title = "details"

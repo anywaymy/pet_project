@@ -15,17 +15,24 @@ from django.conf import settings
 
 
 from users.models import User, EmailVerification, UserPasswordResetToken
-from users.forms import UserLoginForm, UserRegistrationForm, UsersResetPasswordForm
+from users.forms import UserLoginForm, UserRegistrationForm, UsersResetPasswordForm, StyledSetPasswordForm
+from common.view import TitleMixin
 
-class UserLoginView(LoginView):
+class UserLoginView(TitleMixin, LoginView):
     form_class = UserLoginForm
     template_name = "users/login.html"
     success_url = reverse_lazy("main:index")
+    title = "login"
 
-class UserRegistrationView(CreateView):
+    def form_valid(self, form):
+        messages.success(self.request, "Вы успешно авторизовались!")
+        return super().form_valid(form)
+
+class UserRegistrationView(TitleMixin, CreateView):
     form_class = UserRegistrationForm
     template_name = "users/registration.html"
     success_url = reverse_lazy("users:login")
+    title = "registration"
 
     def form_valid(self, form):
 
@@ -42,7 +49,8 @@ class UserRegistrationView(CreateView):
 class UsersResetPasswordView(FormView):
     form_class = UsersResetPasswordForm
     template_name = "users/forgot_password.html"
-    success_url = reverse_lazy("main:index")
+    success_url = reverse_lazy("users:password_reset_info")
+    title = "reset"
 
     def form_valid(self, form):
         email = form.cleaned_data['email']
@@ -61,11 +69,12 @@ class UsersResetPasswordView(FormView):
 
         return super().form_valid(form)
 
-class UsersPasswordConfirmResetView(View):
+class UsersPasswordConfirmResetView(TitleMixin, View):
+    title = "new password"
     # template_name = "users/recovery_link.html"
     def get(self, request, *args, **kwargs):
         code_obj = get_object_or_404(UserPasswordResetToken, code=self.kwargs.get("code"), user__email=self.kwargs.get("email"))
-        form = SetPasswordForm(user=code_obj.user)
+        form = StyledSetPasswordForm(user=code_obj.user)
         if not code_obj:
             return render(request, template_name="users/recovery_invalid_link.html")
 
@@ -77,7 +86,7 @@ class UsersPasswordConfirmResetView(View):
         if not code_obj:
             return render(request, template_name="users/recovery_invalid_link.html")
 
-        form = SetPasswordForm(user=code_obj.user, data=request.POST)
+        form = StyledSetPasswordForm(user=code_obj.user, data=request.POST)
 
         if form.is_valid():
             form.save()
@@ -86,8 +95,9 @@ class UsersPasswordConfirmResetView(View):
 
         return render(request, template_name="users/recovery_link.html", context={"form":form})
 
-class EmailVerificationView(TemplateView):
+class EmailVerificationView(TitleMixin, TemplateView):
     template_name = "users/verification.html"
+    title = "verify"
 
     def get(self, request, *args, **kwargs):
         user = User.objects.filter(email=self.kwargs.get("email")).first()
@@ -101,12 +111,16 @@ class EmailVerificationView(TemplateView):
         else:
             return HttpResponseRedirect(reverse('main:index'))
 
-class UserProfileView(ListView):
+class UserProfileView(TitleMixin, ListView):
     model = User
     template_name = "users/profile.html"
+    title = "profile"
+
+def password_reset_info(request):
+    return render(request, template_name="users/password_reset_info.html", context={"title":"info"})
 
 def password_reset_complete(request):
-    return render(request, template_name="users/password_reset_complete.html")
+    return render(request, template_name="users/password_reset_complete.html", context={"title":"complete"})
 
 def logout(request):
     auth.logout(request)

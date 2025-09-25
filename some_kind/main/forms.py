@@ -3,7 +3,7 @@ from main.models import SendMessage
 
 class SendMessageForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': 'Enter your name or it will be taken from profile',
+        'placeholder': 'Enter your name or it will be taken from your profile',
         'id': 'name'
     }), required=False)
 
@@ -23,7 +23,6 @@ class SendMessageForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        # Пример валидации с использованием self.user
         if not cleaned_data.get('name') and (not self.user or not self.user.is_authenticated):
             self.add_error('name', 'Это поле обязательно, если не авторизованы')
         return cleaned_data

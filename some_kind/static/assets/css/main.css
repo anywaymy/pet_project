@@ -37,6 +37,26 @@ ol, ul {
 	list-style: none;
 }
 
+.messages {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+    text-align: center;
+    opacity: 0;
+}
+
+.messages__styles {
+    display: inline-block;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    color: #ffffff;
+}
+
+.messages--success {
+    background-color: #3f4e85;
+}
+
 .post {
 	max-width: 1000px;
 	margin: 0 auto;
@@ -144,6 +164,11 @@ ol, ul {
 	font-size: 20px;
 	font-family: "Source Sans Pro", sans-serif;
 	color: #ffffff;
+}
+
+.management__forgot a {
+    font-size: 16px;
+    font-family: "Source Sans Pro", sans-serif;
 }
 
 .management__no_account a {

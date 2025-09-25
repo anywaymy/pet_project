@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>recovery</title>
-</head>
-<body>
-    Восстановление
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-         <div class="management__btn">
+{% extends 'users/base.html' %}
+{% block content %}
+    <div class="wrap">
+    <div class="management-content">
+        <form action="" class="management login" method="post">
+            {% csrf_token %}
+            <h1 class="management-title">
+                Восстановление
+            </h1>
+
+            <div class="input-content">
+                {{ form.new_password1 }}
+            </div>
+            <div class="input-content">
+                {{ form.new_password2 }}
+            </div>
+
+            <div class="management__btn">
                 <button class="management__button"  type="submit">Восстановить</button>
             </div>
-    </form>
-</body>
-</html>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
