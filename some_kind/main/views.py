@@ -6,11 +6,14 @@ from main.models import Post
 from main.forms import SendMessageForm
 from django.urls import reverse
 
+from common.view import TitleMixin
 
-class IndexView(FormMixin,ListView):
+
+class IndexView(TitleMixin,FormMixin,ListView):
     model = Post
     form_class = SendMessageForm
     template_name = "main/index.html"
+    title = "main"
 
     def get_success_url(self):
         return reverse("main:index")
@@ -62,7 +65,8 @@ class IndexView(FormMixin,ListView):
 
         return context
 
-class PostDetailView(DetailView):
+class PostDetailView(TitleMixin, DetailView):
     model = Post
     context_object_name = "post"
     template_name = "main/details.html"
+    title = "details"

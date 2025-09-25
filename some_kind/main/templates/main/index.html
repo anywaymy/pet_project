@@ -1,19 +1,14 @@
+{% extends 'main/base.html' %}
 {% load static %}
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Solid State by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
-	</head>
-	<body class="is-preload">
-
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
-
-				<!-- Header -->
+{% block content %}
+					{% if messages %}
+						<ul class="messages">
+							{% for message in messages %}
+							<li class="messages__styles messages--success">{{ message }}</li>
+							{% endfor %}
+						</ul>
+					{% endif %}
+<!-- Header -->
 					<header id="header" class="alt">
 						<h1><a href="{% url 'main:index' %}">Solid State</a></h1>
 						<nav>
@@ -168,19 +163,5 @@
 						</div>
 					</section>
 
-			</div>
+{% endblock %}
 
-		<button id="load-btn">Получить данные</button>
-    	<div id="output"></div>
-
-		<!-- Scripts -->
-			<script src="{% static 'assets/js/browse_all.js' %}"></script>
-			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
-			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
-			<script src="{% static 'assets/js/browser.min.js' %}"></script>
-			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
-			<script src="{% static 'assets/js/util.js' %}"></script>
-			<script src="{% static 'assets/js/main.js' %}"></script>
-
-	</body>
-</html>

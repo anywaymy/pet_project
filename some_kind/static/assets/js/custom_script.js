@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const btn = document.getElementById('browse-all-btn');
+    let message = document.querySelector(".messages");
+
     if (!btn) return;
 
     btn.addEventListener('click', function() {
@@ -35,4 +37,16 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error loading all posts:', err);
         });
     });
+        if (message) {
+        message.style.transition = "opacity 0.5s ease-in";
+        message.style.opacity = "1";
+
+        setTimeout(() => {
+            message.style.transition = "opacity 1.2s ease-out";
+            message.style.opacity = "0";
+            setTimeout(() => {
+                message.remove();
+            }, 1200)
+        }, 3900);
+    }
 });
