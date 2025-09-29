@@ -17,10 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 data.posts.forEach(post => {
                     const article = document.createElement('article');
                     article.innerHTML = `
-                        <a href="/posts/${post.slug}/" class="image"><img src="${post.image_url}" alt="" /></a>
+                        <a href="/details/${post.slug}/" class="image"><img src="${post.image_url}" alt="" /></a>
                         <h3 class="major">${post.name}</h3>
                         <p>${post.description}</p>
-                        <a href="/posts/${post.slug}/" class="special">Learn more</a>
+                        <a href="/details/${post.slug}/" class="special">Learn more</a>
                     `;
                     container.appendChild(article);
                 });
