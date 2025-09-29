@@ -21,38 +21,6 @@
 							{% endfor %}
 						</ul>
 					{% endif %}
-<!-- Header -->
-					<header id="header" class="alt">
-						<h1><a href="{% url 'main:index' %}">Solid State</a></h1>
-						<nav>
-							{% if request.user.is_authenticated %}
-								<a href="{% url 'users:profile' %}" class="username">{{request.user.username}}</a>
-							{% endif %}
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
-
-				<!-- Menu -->
-					<nav id="menu">
-						<div class="inner">
-							<h2>Menu</h2>
-							<ul class="links">
-								<li><a href="{% url 'main:index' %}">Home</a></li>
-								<li><a href=".">Generic</a></li>
-								<li><a href=".">Elements</a></li>
-								{% if request.user.is_authenticated %}
-									<li><a href="{% url 'users:logout' %}">Log out</a></li>
-								{% else %}
-									<li><a href="{% url 'users:login' %}">Log In</a></li>
-								{% endif %}
-								<li><a href="{% url 'users:registration' %}">Sign Up</a></li>
-								{% if user.is_superuser or user.is_stuff %}
-								<li><a href="{% url 'admin:index' %}">Admin panel</a></li>
-								{% endif %}
-							</ul>
-							<a href="#" class="close">Close</a>
-						</div>
-					</nav>
 
 				<!-- Banner -->
 					<section id="banner">
