@@ -1,3 +1,4 @@
 .idea
 venv
 db.sqlite
+some_kind/db.sqlite3
