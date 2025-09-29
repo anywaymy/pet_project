@@ -1,15 +1,15 @@
-from django.http import HttpResponseRedirect, JsonResponse
-from django.views.generic import TemplateView, DetailView, ListView
-from django.views import View
-from django.views.generic.edit import FormMixin
-from main.models import Post
-from main.forms import SendMessageForm
+from django.contrib import messages
+from django.http import JsonResponse
 from django.urls import reverse
+from django.views.generic import DetailView, ListView
+from django.views.generic.edit import FormMixin
 
 from common.view import TitleMixin
+from main.forms import SendMessageForm
+from main.models import Post
 
 
-class IndexView(TitleMixin,FormMixin,ListView):
+class IndexView(TitleMixin, FormMixin, ListView):
     model = Post
     form_class = SendMessageForm
     template_name = "main/index.html"
@@ -44,6 +44,11 @@ class IndexView(TitleMixin,FormMixin,ListView):
             self.object_list = self.get_queryset()
             return self.form_invalid(form)
 
+    def form_valid(self, form):
+        messages.success(self.request, "Ваше письмо было успешно отправлено")
+
+        return super().form_valid(form)
+
     def render_to_response(self, context, **response_kwargs):
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
             posts = context['object_list']
@@ -64,6 +69,7 @@ class IndexView(TitleMixin,FormMixin,ListView):
         context['form'] = self.get_form()
 
         return context
+
 
 class PostDetailView(TitleMixin, DetailView):
     model = Post

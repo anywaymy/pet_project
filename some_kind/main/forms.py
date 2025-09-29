@@ -1,5 +1,7 @@
 from django import forms
+
 from main.models import SendMessage
+
 
 class SendMessageForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={
@@ -24,9 +26,9 @@ class SendMessageForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         if not cleaned_data.get('name') and (not self.user or not self.user.is_authenticated):
-            self.add_error('name', 'Это поле обязательно, если не авторизованы')
+            self.add_error('name', 'Поле "name" обязательно, если не авторизованы')
         return cleaned_data
 
     class Meta:
         model = SendMessage
-        fields = ('name','email','textarea',)
+        fields = ('name', 'email', 'textarea',)

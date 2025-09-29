@@ -1,7 +1,9 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, SetPasswordForm
+from django.contrib.auth.forms import (AuthenticationForm, SetPasswordForm,
+                                       UserCreationForm)
 
 from users.models import User
+
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
@@ -17,6 +19,7 @@ class UserLoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+
 
 class UserRegistrationForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
@@ -41,13 +44,15 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username','email','password1','password2')
+        fields = ('username', 'email', 'password1', 'password2')
+
 
 class UsersResetPasswordForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={
         'placeholder': 'Email',
         'class': 'input-content__input'
     }))
+
 
 class StyledSetPasswordForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):

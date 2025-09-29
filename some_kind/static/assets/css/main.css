@@ -41,7 +41,7 @@ ol, ul {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 3;
+    z-index: 30000;
     text-align: center;
     opacity: 0;
 }
@@ -55,6 +55,10 @@ ol, ul {
 
 .messages--success {
     background-color: #3f4e85;
+}
+
+.messages--error {
+    background-color: #610000;
 }
 
 .post {
