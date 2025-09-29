@@ -8,6 +8,19 @@
 							{% endfor %}
 						</ul>
 					{% endif %}
+
+					{% if form.errors %}
+						<ul class="messages">
+							{% for field in form %}
+								{% for error in field.errors %}
+									<li class="messages__styles messages--error">{{ error }}</li>
+								{% endfor %}
+							{% endfor %}
+							{% for error in form.non_field_errors %}
+								<li class="messages__styles messages--error">{{ error }}</li>
+							{% endfor %}
+						</ul>
+					{% endif %}
 <!-- Header -->
 					<header id="header" class="alt">
 						<h1><a href="{% url 'main:index' %}">Solid State</a></h1>
